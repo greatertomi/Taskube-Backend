@@ -19,9 +19,18 @@ router.get('/', async (request, response) => {
   }
 });
 
-router.post('/createProject', (request, response) => {
-  console.log(request.body);
-  response.status(200).send({ message: 'Thanks' });
+router.post('/createProject', async (request, response) => {
+  const { title, description } = request.body;
+
+  try {
+    await query('insert into projects (title, description) values (?, ?)', [
+      title,
+      description
+    ]);
+    response.status(200).send({ message: 'Project Created' });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;

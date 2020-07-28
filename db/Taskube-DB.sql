@@ -26,12 +26,14 @@ CREATE TABLE `projects` (
   `description` text NOT NULL,
   `userId` int(30) DEFAULT NULL,
   PRIMARY KEY (`projectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `projects` */
 
 insert  into `projects`(`projectId`,`title`,`description`,`userId`) values 
-(1,'first','First and coolest description',NULL);
+(1,'first','First and coolest description',NULL),
+(2,'People','It\'s all about working with people',NULL),
+(3,'Threads','People thread is still thread',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

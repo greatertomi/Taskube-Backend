@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/v1/tasks', require('./routes/tasks'));
+app.use('/api/v1/projects', require('./routes/tasks'));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

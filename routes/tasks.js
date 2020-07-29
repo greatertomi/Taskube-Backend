@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, request } = require('express');
 const db = require('../db');
 const util = require('util');
 const query = util.promisify(db.query).bind(db);
@@ -19,6 +19,18 @@ router.get('/', async (request, response) => {
   }
 });
 
+router.get('/:projectId', async (request, response) => {
+  const { projectId } = request.params;
+  try {
+    const res = await query('SELECT * FROM tasks where projectId = ?', [
+      projectId
+    ]);
+    response.status(200).send(res);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.post('/createProject', async (request, response) => {
   const { title, description } = request.body;
 
@@ -28,6 +40,20 @@ router.post('/createProject', async (request, response) => {
       description
     ]);
     response.status(200).send({ message: 'Project Created' });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post('/createTask', async (request, response) => {
+  const { projectId, description } = request.body;
+  console.log(request.body);
+  try {
+    await query('insert into tasks (projectId, description) values (?, ?)', [
+      projectId,
+      description
+    ]);
+    response.status(200).send({ message: 'Task Created' });
   } catch (err) {
     console.log(err);
   }
